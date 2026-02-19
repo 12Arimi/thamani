@@ -5,6 +5,7 @@
   --color-sacco-dark: #2e632b;    /* Deep Forest Green (Trust & Stability) */
   --color-sacco-light: #49a146;   /* Agriculture Green (Growth & Crops) This is my main theme*/
   --color-sacco-accent: #fef100;  /* Harvest Yellow (Energy & Opportunity) */
+  --color-sacco-earth: #92400e;   /* Earth Brown (Nurturing & Stability) */
 }
 
 :root {

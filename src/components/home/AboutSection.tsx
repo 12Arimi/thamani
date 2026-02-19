@@ -34,7 +34,7 @@ export function AboutSection() {
             </p>
           </div>
 
-          <button className="bg-[#1a3c34] text-white px-8 py-3 rounded-sm font-bold text-[10px] uppercase tracking-widest hover:bg-[#ffde21] hover:text-[#1a3c34] transition-all duration-300">
+          <button className="bg-sacco-light text-white px-8 py-3 rounded-sm font-bold text-[10px] uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all duration-300 shadow-md">
             Discover Our Story
           </button>
         </div>
