@@ -45,7 +45,7 @@ export function Navbar() {
 
   const menuItems = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
+    { name: "About Us", href: "/about-us" },
     { name: "Savings", submenu: ["Savings Account", "Fixed Deposit Account", "Education Savings", "Business Account", "Thamani Junior Account"] },
     { name: "Loans", submenu: ["FOSA Product Loans", "BOSA Products"] },
     { name: "Membership", href: "/membership" },
