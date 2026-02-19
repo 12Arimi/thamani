@@ -1,19 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* AGRICULTURE-INSPIRED THEME */
-  --color-sacco-dark: #2e632b;    /* Deep Forest Green (Trust & Stability) */
-  --color-sacco-light: #49a146;   /* Agriculture Green (Growth & Crops) This is my main theme*/
-  --color-sacco-accent: #fef100;  /* Harvest Yellow (Energy & Opportunity) */
-  --color-sacco-earth: #92400e;   /* Earth Brown (Nurturing & Stability) */
+  /* PRIMARY BRAND COLORS */
+  --color-sacco-dark: #2e632b;    /* Deep Forest Green (Trust) */
+  --color-sacco-light: #49a146;   /* Agriculture Green (Growth) */
+  --color-sacco-accent: #fef100;  /* Harvest Yellow (Energy) */
+  --color-sacco-earth: #92400e;   /* Earth Brown (Stability) */
+
+  /* NEUTRAL UTILITIES (The "Grey-ish" tones) */
+  --color-sacco-mist: #f1f5f2;    /* Very light grey-green for sections */
+  --color-sacco-bone: #fafaf9;    /* Warm off-white for subtle backgrounds */
+  
+  /* SHADOWS & RADIUS */
+  --radius-sacco: 12px;
 }
 
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
+  --section-alt: var(--color-sacco-mist);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04"; /* Cleaner typography */
+}
+
+/* Helper for that grey-ish section you liked */
+.bg-section-muted {
+  background-color: var(--color-sacco-mist);
 }

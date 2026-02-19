@@ -7,6 +7,7 @@ import { Products } from '@/components/home/Products';
 import { News } from '@/components/home/News';
 import { Partners } from '@/components/home/Partners';
 import { ServicesSection } from '@/components/home/ServicesSection';
+import { ProductsSection } from '@/components/home/ProductsSection';
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
       <AboutSection />
       <MissionVision />
       <ServicesSection />
-      <Products />
+      <ProductsSection />
       <News />
       <Partners />
     </main>

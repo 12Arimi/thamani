@@ -51,7 +51,7 @@ export function Navbar() {
     { name: "Membership", href: "/membership" },
     { name: "Services", submenu: ["Mobile Banking", "Agency Banking", "Paybill Services", "ATM Services", "Western Union", "Till Numbers"] },
     { name: "Media Center", submenu: ["News", "Gallery", "Downloads", "Careers"] },
-    { name: "Contacts", href: "/contacts" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const toggleSubmenu = (name: string) => {
@@ -178,7 +178,7 @@ export function Navbar() {
             </div>
           ))}
           
-          <button className="ml-4 flex items-center gap-2 bg-sacco-dark text-white px-6 py-3 rounded shadow-lg font-bold text-xs uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all">
+          <button className="ml-4 flex items-center gap-2 bg-sacco-light text-white px-6 py-3 rounded shadow-lg font-bold text-xs uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all">
             <User size={16} /> Portal
           </button>
         </div>
