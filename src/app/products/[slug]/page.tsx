@@ -91,10 +91,10 @@ export default function ProductDetailsPage() {
       <section className="py-12 bg-white px-6 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <button 
-            onClick={() => router.back()}
+            onClick={() => router.push('/products')}
             className="flex items-center gap-2 text-sacco-dark/40 hover:text-sacco-light transition-colors font-black uppercase text-[10px] tracking-widest mb-12"
           >
-            <ChevronLeft size={16} /> Return to category
+            <ChevronLeft size={16} /> See All Products
           </button>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
