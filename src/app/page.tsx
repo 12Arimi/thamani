@@ -3,7 +3,6 @@
 import { Hero } from '@/components/home/Hero';
 import { AboutSection } from '@/components/home/AboutSection';
 import { MissionVision } from '@/components/home/MissionVision';
-import { Products } from '@/components/home/Products';
 import { News } from '@/components/home/News';
 import { Partners } from '@/components/home/Partners';
 import { ServicesSection } from '@/components/home/ServicesSection';
