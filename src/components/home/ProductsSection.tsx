@@ -16,16 +16,19 @@ export function ProductsSection() {
       title: "FOSA PRODUCTS (Accounts)",
       description: "Secure accounts for daily transactions and building your financial base.",
       items: ["Savings Account", "Fixed Deposits", "Business Account", "Education Account", "Thamani Junior"],
+      link: "/fosa-accounts"
     },
     {
       title: "FOSA PRODUCTS (Loans)",
       description: "Quick advances for crop improvement, salaries, and asset financing.",
       items: ["Special Crop Advance", "Coffee Improvement", "Milk Advance", "Salary Advance", "Asset Financing"],
+      link: "/fosa-loans"
     },
     {
       title: "BOSA PRODUCTS",
       description: "Development and investment loans based on your Sacco shares.",
       items: ["Development Loan", "School Fees Loan", "Biashara Loan", "Group/Micro Credit", "Emergency Loan"],
+      link: "/bosa"
     }
   ];
 
@@ -53,10 +56,7 @@ export function ProductsSection() {
               key={index} 
               className="flex flex-col h-full bg-white border border-gray-200 rounded-[--radius-sacco] overflow-hidden hover:shadow-[0_20px_50px_rgba(46,99,43,0.08)] transition-all duration-500 group"
             >
-              {/* COMPACT CARD HEADER 
-                  - Removed p-10 and min-h-[180px]
-                  - Removed background color and decorative patterns
-              */}
+              {/* COMPACT CARD HEADER */}
               <div className="px-8 pt-8 pb-4">
                 <h3 className="text-xl font-black text-sacco-dark leading-tight border-b-2 border-sacco-light/20 pb-4">
                   {group.title}
@@ -79,13 +79,13 @@ export function ProductsSection() {
                   ))}
                 </div>
 
-                {/* Action Button */}
+                {/* Action Button - Updated Link & Text Only */}
                 <div className="mt-8">
                   <Link 
-                    href="/products" 
+                    href={group.link} 
                     className="block text-center py-3 rounded-lg bg-sacco-light text-white font-black text-[10px] uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all duration-300 shadow-sm active:scale-95"
                   >
-                    Explore Category
+                    View All Products
                   </Link>
                 </div>
               </div>
