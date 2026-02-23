@@ -116,7 +116,7 @@ export function Navbar() {
           <div className="flex flex-col justify-center">
             <span className="font-black text-base lg:text-lg text-[#1a3c34] uppercase tracking-tighter leading-none">Thamani</span>
             {/* MATCHED FONT AND SPACING ON MOBILE */}
-            <span className="font-bold text-[13px] lg:text-[14px] text-sacco-light uppercase tracking-[0.85em] lg:tracking-[0.65em] leading-none mt-1">Sacco</span>
+            <span className="font-bold text-[13px] lg:text-[14px] text-sacco-light uppercase tracking-[0.65em] lg:tracking-[0.65em] leading-none mt-1">Sacco</span>
           </div>
         </Link>
 
