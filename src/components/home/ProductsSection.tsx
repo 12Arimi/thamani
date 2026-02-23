@@ -16,19 +16,19 @@ export function ProductsSection() {
       title: "FOSA PRODUCTS (Accounts)",
       description: "Secure accounts for daily transactions and building your financial base.",
       items: ["Savings Account", "Fixed Deposits", "Business Account", "Education Account", "Thamani Junior"],
-      link: "/fosa-accounts"
+      link: "/products"
     },
     {
       title: "FOSA PRODUCTS (Loans)",
       description: "Quick advances for crop improvement, salaries, and asset financing.",
       items: ["Special Crop Advance", "Coffee Improvement", "Milk Advance", "Salary Advance", "Asset Financing"],
-      link: "/fosa-loans"
+      link: "/products"
     },
     {
       title: "BOSA PRODUCTS",
       description: "Development and investment loans based on your Sacco shares.",
       items: ["Development Loan", "School Fees Loan", "Biashara Loan", "Group/Micro Credit", "Emergency Loan"],
-      link: "/bosa"
+      link: "/products"
     }
   ];
 

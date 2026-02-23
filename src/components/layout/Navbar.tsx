@@ -61,6 +61,7 @@ export function Navbar() {
     const slug = sub.toLowerCase().replace(/ /g, '-').replace(/[()]/g, '');
     if (parentName === "Services") return sub === "All Services" ? "/services" : `/services/${slug}`;
     if (parentName === "Products") return sub === "All Products" ? "/products" : `/products/${slug}`;
+    if (sub === "News") return "/blog";
     return `/${slug}`;
   };
 
