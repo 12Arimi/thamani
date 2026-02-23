@@ -19,21 +19,39 @@ export function Footer() {
   const WHATSAPP_NUMBER = "+254769207535";
   const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.thamani.tangazoletu&gl=US";
 
+  const menuItems = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about-us" },
+    { name: "Services", submenu: ["All Services", "Mobile Banking", "Agency Banking", "Paybill Services", "ATM Services", "Western Union", "Till Numbers"] },
+    { name: "Products", href: "/products" },
+    { name: "Membership", href: "/membership" },
+    { name: "Careers", href: "/careers" },
+    { name: "Media Center", submenu: ["News", "Gallery", "Downloads"] },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const getSubmenuHref = (parentName: string, sub: string) => {
+    const slug = sub.toLowerCase().replace(/ /g, '-').replace(/[()]/g, '');
+    if (parentName === "Services") return sub === "All Services" ? "/services" : `/services/${slug}`;
+    if (parentName === "Products") return sub === "All Products" ? "/products" : `/products/${slug}`;
+    if (sub === "News") return "/blogs";
+    return `/${slug}`;
+  };
+
   return (
     <>
       {/* 1. FLOATING WHATSAPP BUTTON */}
       <a 
-        href={`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-[9999] hover:scale-110 transition-transform flex items-center justify-center shadow-2xl rounded-full"
         aria-label="Chat on WhatsApp"
       >
-        {/* The image is now the only source of color and shape */}
         <img 
           src="/images/whatsapp.svg" 
           alt="WhatsApp" 
-          className="w-12 h-12 block" // Control the total size of the button here
+          className="w-12 h-12 block" 
         />
       </a>
 
@@ -43,25 +61,35 @@ export function Footer() {
             
             {/* Column 1: Brand & App Download */}
             <div className="space-y-6">
-              <div className="flex items-center gap-2">
-                <div className="bg-sacco-accent text-sacco-dark w-10 h-10 flex items-center justify-center rounded font-black text-xl">T</div>
+              <div className="flex items-center gap-3">
+                {/* Replaced 'T' box with actual logo */}
+                <img src="/images/logo.png" alt="Thamani Logo" className="h-12 w-auto object-contain" />
                 <span className="font-black text-xl tracking-tighter uppercase">Thamani<span className="text-sacco-accent">Sacco</span></span>
               </div>
               <p className="text-gray-300 text-xs leading-relaxed max-w-xs uppercase tracking-wider font-medium">
                 Empowering our members through innovative financial solutions since 1987. Regulated by SASRA.
               </p>
               
-              <div className="pt-2">
+              <div className="pt-3">
                 <a 
                   href={PLAY_STORE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/10 px-5 py-3 rounded-xl transition-all group"
+                  /* Kept original bg and border. Replaced hover color changes with hover:scale-105 */
+                  className="inline-flex items-center gap-5 bg-sacco-accent border-2 border-sacco-accent px-8 py-5 rounded-[1.25rem] transition-all duration-300 group shadow-xl hover:scale-105"
                 >
-                  <Smartphone className="text-sacco-accent group-hover:scale-110 transition-transform" />
+                  {/* Kept original sacco-dark color */}
+                  <Smartphone size={32} className="text-sacco-dark group-hover:scale-110 transition-transform duration-300" />
+                  
                   <div className="text-left">
-                    <p className="text-[8px] font-bold text-gray-400 uppercase tracking-[0.2em] leading-none mb-1">Get it on</p>
-                    <p className="text-[12px] font-black uppercase tracking-wider leading-none">Google Play</p>
+                    {/* Kept original sacco-earth color */}
+                    <p className="text-[11px] font-black text-sacco-earth uppercase tracking-[0.25em] leading-none mb-1.5">
+                      Get it on
+                    </p>
+                    {/* Kept original sacco-dark color */}
+                    <p className="text-[18px] font-black text-sacco-dark uppercase tracking-widest leading-none">
+                      Google Play
+                    </p>
                   </div>
                 </a>
               </div>
@@ -79,14 +107,17 @@ export function Footer() {
             <div>
               <h4 className="text-sacco-accent font-black text-[10px] uppercase tracking-[0.2em] mb-8">Quick Navigation</h4>
               <ul className="space-y-4">
-                {['About Thamani', 'Our History', 'Board of Directors', 'Management Team', 'Careers'].map((item) => (
-                  <li key={item}>
-                    <Link href="#" className="text-gray-300 text-[10px] font-bold uppercase tracking-widest hover:text-sacco-accent transition-colors flex items-center gap-2 group">
-                      <span className="w-1 h-1 bg-sacco-accent rounded-full opacity-0 group-hover:opacity-100 transition-all"></span>
-                      {item}
-                    </Link>
-                  </li>
-                ))}
+                {menuItems.map((item) => {
+                  const href = item.href || (item.submenu ? getSubmenuHref(item.name, item.submenu[0]) : "#");
+                  return (
+                    <li key={item.name}>
+                      <Link href={href} className="text-gray-300 text-[10px] font-bold uppercase tracking-widest hover:text-sacco-accent transition-colors flex items-center gap-2 group">
+                        <span className="w-1 h-1 bg-sacco-accent rounded-full opacity-0 group-hover:opacity-100 transition-all"></span>
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
@@ -97,7 +128,7 @@ export function Footer() {
                 <li className="flex gap-4 items-start">
                   <MapPin size={18} className="text-sacco-accent shrink-0" />
                   <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest leading-loose">
-                    Thamani Plaza, Main Street<br />P.O. Box 123-456, Nairobi, Kenya
+                    Thamani Plaza, Main Street<br />P.O. Box 467, Chuka, Kenya
                   </p>
                 </li>
                 <li className="flex gap-4 items-center">
@@ -106,7 +137,7 @@ export function Footer() {
                 </li>
                 <li className="flex gap-4 items-center">
                   <Mail size={18} className="text-sacco-accent shrink-0" />
-                  <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest">info@thamanisacco.co.ke</p>
+                  <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest">info@thamanisacco.or.ke</p>
                 </li>
               </ul>
             </div>
@@ -137,8 +168,8 @@ export function Footer() {
               © {currentYear} Thamani Sacco Society Ltd. All Rights Reserved.
             </p>
             <div className="flex gap-6">
-              <Link href="#" className="text-gray-500 text-[9px] font-bold uppercase tracking-widest hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="text-gray-500 text-[9px] font-bold uppercase tracking-widest hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link href="/privacy-policy" className="text-gray-500 text-[9px] font-bold uppercase tracking-widest hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-gray-500 text-[9px] font-bold uppercase tracking-widest hover:text-white transition-colors">Terms & Conditions</Link>
             </div>
           </div>
         </div>
