@@ -67,26 +67,23 @@ export function Footer() {
                 <span className="font-black text-xl tracking-tighter uppercase">Thamani<span className="text-sacco-accent">Sacco</span></span>
               </div>
               <p className="text-gray-300 text-xs leading-relaxed max-w-xs uppercase tracking-wider font-medium">
-                Empowering our members through innovative financial solutions since 1987. Regulated by SASRA.
+                Thamani Sacco Society Limited, formerly Nithi Tea Growers Sacco Ltd is a co-operative society registered under co-operative Act CAP 12 of 1997 with a mandate for mobilization of member’s savings and availing credit to them.
               </p>
               
-              <div className="pt-3">
+              <div className="pt-0">
                 <a 
                   href={PLAY_STORE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  /* Kept original bg and border. Replaced hover color changes with hover:scale-105 */
-                  className="inline-flex items-center gap-5 bg-sacco-accent border-2 border-sacco-accent px-8 py-5 rounded-[1.25rem] transition-all duration-300 group shadow-xl hover:scale-105"
+                  /* Changed rounded-[1.25rem] to rounded-none for perfectly sharp edges */
+                  className="inline-flex items-center gap-5 bg-sacco-accent border-2 border-sacco-accent px-8 py-5 rounded-none transition-all duration-300 group shadow-xl hover:scale-105"
                 >
-                  {/* Kept original sacco-dark color */}
                   <Smartphone size={32} className="text-sacco-dark group-hover:scale-110 transition-transform duration-300" />
                   
                   <div className="text-left">
-                    {/* Kept original sacco-earth color */}
                     <p className="text-[11px] font-black text-sacco-earth uppercase tracking-[0.25em] leading-none mb-1.5">
                       Get it on
                     </p>
-                    {/* Kept original sacco-dark color */}
                     <p className="text-[18px] font-black text-sacco-dark uppercase tracking-widest leading-none">
                       Google Play
                     </p>
