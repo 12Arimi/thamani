@@ -1,128 +1,136 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { 
-  MapPin, 
-  Clock, 
-  ShieldCheck, 
-  Heart,
-  ChevronRight,
-  Search,
-  Briefcase
+  ChevronRight, 
+  Loader2, 
+  ArrowRight,
+  Briefcase,
+  Calendar,
+  FileText
 } from 'lucide-react';
+import Link from 'next/link';
 
-export default function CareersPage() {
-  const vacancies = [
-    {
-      title: "Internal Auditor",
-      department: "Risk & Compliance",
-      location: "Head Office",
-      deadline: "June 15, 2024",
-      summary: "Responsible for evaluating the effectiveness of the Sacco's risk management and governance processes."
-    },
-    {
-      title: "ICT Support Officer",
-      department: "Information Technology",
-      location: "Nakuru Branch",
-      deadline: "June 10, 2024",
-      summary: "Ensuring high availability of Sacco systems and providing technical support to staff."
-    }
-  ];
+interface Career {
+  id: number;
+  title: string;
+  slug: string;
+  display_date: string;
+  full_pdf_url: string | null;
+}
+
+export default function CareersListPage() {
+  const [careers, setCareers] = useState<Career[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('https://arimi.co.ke/thamani/fetch-careers.php')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setCareers(data);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error loading careers:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center">
+          <Loader2 className="w-10 h-10 text-sacco-light animate-spin mb-4" />
+          <p className="text-sacco-dark font-bold uppercase tracking-widest text-[9px]">Loading Opportunities...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <main className="bg-[#fcfdfc] min-h-screen">
-      {/* 1. COMPACT BLENDED HERO */}
-      <section className="relative bg-[#1a3c34] pt-24 pb-12 px-6 lg:px-16 overflow-hidden">
-        {/* Yellow Translucent Blend Layer */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#ffde21]/10 skew-x-[-20deg] translate-x-32 z-0"></div>
+    <main className="bg-white pt-[76px] sm:pt-[116px] lg:pt-[126px]">
+      
+      {/* 1. SLIM BANNER STRIP */}
+      <section className="relative h-[150px] w-full flex items-center justify-center overflow-hidden border-b-4 border-sacco-accent">
+        <img 
+          src="/images/mobile-banking-bg02.jpg" 
+          className="absolute inset-0 w-full h-full object-cover opacity-80" 
+          alt="Careers"
+        />
+        <div className="absolute inset-0 bg-sacco-dark/50"></div>
         
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <h1 className="text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter leading-none">
-              Career <span className="text-[#ffde21]">Opportunities.</span>
-            </h1>
-            <p className="text-white/60 text-[10px] font-bold uppercase tracking-[0.3em] mt-3">
-              Join the Thamani Sacco Professional Team
-            </p>
-          </div>
-          <div className="hidden md:block h-12 w-[1px] bg-white/10"></div>
-          <div className="max-w-sm">
-            <p className="text-white/50 text-[11px] font-medium leading-relaxed">
-              We empower our staff to innovate and grow, providing a stable foundation for a fulfilling professional journey.
-            </p>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-16 flex flex-col items-center justify-center text-center gap-3">
+          <h1 className="text-3xl lg:text-5xl font-black text-white uppercase tracking-tighter">
+            Work with <span className="text-sacco-accent">Us</span>
+          </h1>
+          
+          <div className="flex items-center gap-2 text-white/70 font-bold uppercase tracking-[0.2em] text-[9px] bg-white/5 px-3 py-1.5 rounded-none backdrop-blur-sm border border-white/10">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={10} className="text-sacco-accent" />
+            <span className="text-sacco-accent">Careers</span>
           </div>
         </div>
       </section>
 
-      {/* 2. INCLUSIVITY STRIP - HIGHLIGHTED */}
-      <section className="bg-[#ffde21] py-4 px-6 lg:px-16 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center gap-4">
-          <ShieldCheck className="text-[#1a3c34] shrink-0" size={18} />
-          <p className="text-[#1a3c34] font-black uppercase text-[9px] leading-tight tracking-tight">
-            "This organization values integrity and inclusivity, guaranteeing that opportunities are awarded on merit alone, and persons with disabilities are strongly supported and recommended to apply."
-          </p>
-        </div>
-      </section>
-
-      {/* 3. VACANCIES LIST */}
-      <section className="py-16 px-6 lg:px-16 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-10 border-b border-gray-100 pb-6">
-          <h3 className="text-[#1a3c34] font-black text-xl uppercase tracking-tighter flex items-center gap-2">
-            <Briefcase size={18} className="text-[#3b93a0]" /> 
-            Active Vacancies
-          </h3>
-          <div className="relative group hidden sm:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
-            <input 
-              type="text" 
-              placeholder="Filter roles..." 
-              className="bg-white border border-gray-200 rounded-full py-2 pl-10 pr-4 text-[10px] font-bold outline-none focus:border-[#3b93a0] w-64 transition-all"
-            />
+      {/* 2. CAREERS LIST SECTION */}
+      <section className="py-12 lg:py-20 px-4 lg:px-16 bg-gray-50/30">
+        <div className="max-w-4xl mx-auto">
+          
+          <div className="flex items-center gap-3 text-sacco-light uppercase tracking-[0.3em] font-bold text-[10px] mb-10">
+            <Briefcase size={14} />
+            <span>Open Vacancies</span>
           </div>
-        </div>
 
-        <div className="grid gap-4">
-          {vacancies.map((job, i) => (
-            <div key={i} className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#ffde21] shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row justify-between md:items-center gap-6">
-              <div className="flex-grow">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-[#3b93a0] text-[8px] font-black uppercase tracking-widest">{job.department}</span>
-                  <span className="text-gray-300 text-[10px]">•</span>
-                  <span className="text-gray-400 text-[8px] font-black uppercase tracking-widest flex items-center gap-1">
-                    <Clock size={10} /> Deadline: {job.deadline}
-                  </span>
+          <div className="flex flex-col gap-4">
+            {careers.map((job) => (
+              <div 
+                key={job.id} 
+                className="group bg-white border border-gray-100 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm hover:border-sacco-accent hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex-grow">
+                  <h3 className="text-xl font-black text-sacco-dark uppercase tracking-tight group-hover:text-sacco-light transition-colors mb-2">
+                    {job.title}
+                  </h3>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-1.5 text-gray-400 font-bold text-[10px] uppercase tracking-widest">
+                      <Calendar size={12} className="text-sacco-accent" />
+                      Deadline: <span className="text-sacco-dark">{job.display_date}</span>
+                    </div>
+                    {job.full_pdf_url && (
+                      <a 
+                        href={job.full_pdf_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-red-500 font-bold text-[10px] uppercase tracking-widest hover:underline"
+                      >
+                        <FileText size={12} />
+                        View JD (PDF)
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <h4 className="text-lg font-black text-[#1a3c34] uppercase tracking-tighter group-hover:text-[#3b93a0] transition-colors">
-                  {job.title}
-                </h4>
-                <p className="text-gray-500 text-[11px] font-medium mt-1 line-clamp-1">{job.summary}</p>
-              </div>
 
-              <div className="flex items-center justify-between md:justify-end gap-6 border-t md:border-none pt-4 md:pt-0">
-                <div className="flex items-center gap-2 text-gray-400">
-                  <MapPin size={12} />
-                  <span className="text-[9px] font-black uppercase tracking-widest">{job.location}</span>
+                <div className="flex-shrink-0">
+                  <Link 
+                    href={`/careers/${job.slug}`}
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-sacco-light text-white font-black text-[9px] uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all duration-300 shadow-sm"
+                  >
+                    View Details <ArrowRight size={12} />
+                  </Link>
                 </div>
-                <Link href="#" className="bg-[#1a3c34] text-white p-3 rounded-xl hover:bg-[#ffde21] hover:text-[#1a3c34] transition-all">
-                  <ChevronRight size={18} />
-                </Link>
               </div>
+            ))}
+          </div>
+
+          {careers.length === 0 && (
+            <div className="text-center py-20 bg-white border border-gray-100">
+              <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">No vacancies at the moment. Please check back later.</p>
             </div>
-          ))}
-        </div>
-
-        {/* TALENT POOL MINI-SECTION */}
-        <div className="mt-12 p-8 rounded-3xl bg-gray-50 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <p className="text-[#1a3c34] font-black text-xs uppercase tracking-tight">No relevant opening today?</p>
-            <p className="text-gray-500 text-[10px] font-medium mt-1">Submit your CV to our database for future consideration.</p>
-          </div>
-          <button className="whitespace-nowrap bg-white border border-gray-200 text-[#1a3c34] px-6 py-3 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-[#1a3c34] hover:text-white transition-all">
-            General Application
-          </button>
+          )}
         </div>
       </section>
     </main>
   );
-} 
+}

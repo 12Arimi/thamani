@@ -1,169 +1,128 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
-  Image as ImageIcon, 
-  Maximize2, 
-  Calendar, 
-  MapPin, 
-  Filter,
-  ChevronRight,
-  PlayCircle
+  ChevronRight, 
+  Loader2, 
+  ArrowRight,
+  Image as ImageIcon,
+  Camera,
+  Layers
 } from 'lucide-react';
+import Link from 'next/link';
 
-export default function GalleryPage() {
-  const [filter, setFilter] = useState('All');
+interface GalleryListItem {
+  id: number;
+  album_name: string;
+  slug: string; // Used for routing
+  total_images: number;
+}
 
-  const categories = ['All', 'Events', 'CSR', 'Branches', 'Members'];
+export default function GalleryListPage() {
+  const [galleries, setGalleries] = useState<GalleryListItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const photos = [
-    { 
-      title: "2024 Annual General Meeting", 
-      cat: "Events", 
-      date: "May 2024", 
-      location: "Nairobi",
-      size: "large", // This will span 2 columns
-      img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" 
-    },
-    { 
-      title: "Nakuru Branch Launch", 
-      cat: "Branches", 
-      date: "April 2024", 
-      location: "Nakuru",
-      size: "small",
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" 
-    },
-    { 
-      title: "Tree Planting Initiative", 
-      cat: "CSR", 
-      date: "March 2024", 
-      location: "Kiambu",
-      size: "small",
-      img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600" 
-    },
-    { 
-      title: "Member Education Forum", 
-      cat: "Members", 
-      date: "Feb 2024", 
-      location: "Mombasa",
-      size: "medium",
-      img: "https://images.unsplash.com/photo-1524178232353-12d488fb98a3?auto=format&fit=crop&q=80&w=700" 
-    },
-    { 
-      title: "Sacco Awards Night", 
-      cat: "Events", 
-      date: "Dec 2023", 
-      location: "Nairobi",
-      size: "small",
-      img: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=600" 
-    },
-  ];
+  // API Configuration
+  const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://arimi.co.ke/thamani';
+  const API_URL = `${BASE_URL}/fetch-galleries.php`;
 
-  const filteredPhotos = filter === 'All' ? photos : photos.filter(p => p.cat === filter);
+  useEffect(() => {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        setGalleries(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Gallery Fetch Error:", err);
+        setLoading(false);
+      });
+  }, [API_URL]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center">
+          <Loader2 className="w-10 h-10 text-sacco-light animate-spin mb-4" />
+          <p className="text-sacco-dark font-bold uppercase tracking-widest text-[9px]">Loading Archives...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <main className="bg-[#fdfcf7] min-h-screen">
-      {/* 1. GALLERY HERO - CLEAN & HIGH CONTRAST */}
-      <section className="bg-[#1a3c34] pt-28 pb-32 px-6 lg:px-16 relative overflow-hidden rounded-b-[4rem]">
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="flex justify-center items-center gap-3 mb-6">
-            <div className="h-[1px] w-12 bg-[#3b93a0]"></div>
-            <span className="text-[#ffde21] font-black text-[10px] uppercase tracking-[0.4em]">Visual Journey</span>
-            <div className="h-[1px] w-12 bg-[#3b93a0]"></div>
-          </div>
-          <h1 className="text-6xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-8">
-            Our <span className="text-[#3b93a0]">Impact.</span>
+    <main className="bg-white pt-[76px] sm:pt-[116px] lg:pt-[126px]">
+      
+      {/* 1. SLIM BANNER STRIP */}
+      <section className="relative h-[150px] w-full flex items-center justify-center overflow-hidden border-b-4 border-sacco-accent">
+        <img 
+          src="/images/mobile-banking-bg02.jpg" 
+          className="absolute inset-0 w-full h-full object-cover opacity-80" 
+          alt="Gallery Archives"
+        />
+        <div className="absolute inset-0 bg-sacco-dark/50"></div>
+        
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-16 flex flex-col items-center justify-center text-center gap-3">
+          <h1 className="text-3xl lg:text-5xl font-black text-white uppercase tracking-tighter">
+            Our <span className="text-sacco-accent">Moments</span>
           </h1>
           
-          {/* CATEGORY FILTER PILLS */}
-          <div className="flex flex-wrap justify-center gap-3 mt-12">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                  filter === cat 
-                  ? 'bg-[#ffde21] text-[#1a3c34] scale-110 shadow-xl' 
-                  : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white border border-white/10'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex items-center gap-2 text-white/70 font-bold uppercase tracking-[0.2em] text-[9px] bg-white/5 px-3 py-1.5 rounded-none backdrop-blur-sm border border-white/10">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={10} className="text-sacco-accent" />
+            <span className="text-sacco-accent">Media Gallery</span>
           </div>
-        </div>
-        
-        {/* Abstract background elements to break the monologue */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#3b93a0] rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#ffde21] rounded-full blur-[100px] opacity-10"></div>
         </div>
       </section>
 
-      {/* 2. DYNAMIC MASONRY GRID */}
-      <section className="py-20 px-6 lg:px-16 max-w-7xl mx-auto -mt-16 relative z-20">
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {filteredPhotos.map((photo, i) => (
-            <div 
-              key={i} 
-              className="relative group overflow-hidden rounded-[2.5rem] bg-white border border-gray-100 break-inside-avoid shadow-sm hover:shadow-2xl transition-all duration-500"
-            >
-              <img 
-                src={photo.img} 
-                alt={photo.title}
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
-              />
-              
-              {/* Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c34] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="bg-[#ffde21] text-[#1a3c34] text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded">
-                      {photo.cat}
-                    </span>
-                  </div>
-                  <h4 className="text-white font-black uppercase text-lg leading-tight mb-2 tracking-tighter">
-                    {photo.title}
-                  </h4>
-                  <div className="flex items-center justify-between text-white/60 text-[10px] font-bold uppercase tracking-widest">
-                    <div className="flex items-center gap-4">
-                      <span className="flex items-center gap-1"><Calendar size={12}/> {photo.date}</span>
-                      <span className="flex items-center gap-1"><MapPin size={12}/> {photo.location}</span>
-                    </div>
-                    <div className="bg-white/20 p-2 rounded-full hover:bg-[#ffde21] hover:text-[#1a3c34] transition-colors">
-                      <Maximize2 size={14} />
+      {/* 2. GALLERY LIST SECTION */}
+      <section className="py-12 lg:py-20 px-4 lg:px-16 bg-gray-50/30">
+        <div className="max-w-4xl mx-auto">
+          
+          <div className="flex items-center gap-3 text-sacco-light uppercase tracking-[0.3em] font-bold text-[10px] mb-10">
+            <Layers size={14} />
+            <span>Photo Collections</span>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {galleries.map((album) => (
+              <div 
+                key={album.id} 
+                className="group bg-white border border-gray-100 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm hover:border-sacco-accent hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex-grow">
+                  <h3 className="text-xl font-black text-sacco-dark uppercase tracking-tight group-hover:text-sacco-light transition-colors mb-2">
+                    {album.album_name}
+                  </h3>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-1.5 text-gray-400 font-bold text-[10px] uppercase tracking-widest">
+                      <Camera size={12} className="text-sacco-accent" />
+                      Files: <span className="text-sacco-dark">{album.total_images} Images</span>
                     </div>
                   </div>
+                </div>
+
+                <div className="flex-shrink-0">
+                  {/* CRITICAL CHANGE: This now points to /[slug] instead of /[id] */}
+                  <Link 
+                    href={`/gallery/${album.slug}`}
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-sacco-light text-white font-black text-[9px] uppercase tracking-widest hover:bg-sacco-accent hover:text-sacco-dark transition-all duration-300 shadow-sm"
+                  >
+                    Open Album <ArrowRight size={12} />
+                  </Link>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* 3. VIDEO SHOWCASE CTA */}
-        <div className="mt-20 bg-white rounded-[4rem] p-12 lg:p-20 shadow-2xl border border-gray-100 flex flex-col lg:flex-row items-center gap-12 overflow-hidden relative">
-          <div className="lg:w-1/2 z-10">
-            <h3 className="text-[#1a3c34] text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-none mb-6">
-              Watch Our <span className="text-[#3b93a0]">Success Stories.</span>
-            </h3>
-            <p className="text-gray-500 text-sm font-medium mb-8 max-w-md">
-              Beyond photos, our video documentaries capture the real voices of members whose lives have been transformed through Thamani Sacco.
-            </p>
-            <button className="flex items-center gap-4 bg-[#1a3c34] text-white px-10 py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-[#ffde21] hover:text-[#1a3c34] transition-all group">
-              Explore Video Vault <PlayCircle size={18} className="group-hover:scale-125 transition-transform" />
-            </button>
-          </div>
-          <div className="lg:w-1/2 relative">
-             <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-video group">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
-                    <PlayCircle size={40} className="text-[#ffde21]" />
-                  </div>
-                </div>
-             </div>
-          </div>
-          <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-[#3b93a0]/5 rounded-full blur-3xl"></div>
+          {galleries.length === 0 && (
+            <div className="text-center py-20 bg-white border border-gray-100">
+              <ImageIcon className="w-8 h-8 text-gray-200 mx-auto mb-3" />
+              <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                No collections available at the moment.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </main>

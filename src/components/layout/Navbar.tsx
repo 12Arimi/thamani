@@ -49,7 +49,8 @@ export function Navbar() {
     { name: "Services", submenu: ["All Services", "Mobile Banking", "Agency Banking", "Paybill Services", "ATM Services", "Western Union", "Till Numbers"] },
     { name: "Products", href: "/products" },
     { name: "Membership", href: "/membership" },
-    { name: "Media Center", submenu: ["News", "Gallery", "Downloads", "Careers"] },
+    { name: "Careers", href: "/careers" },
+    { name: "Media Center", submenu: ["News", "Gallery", "Downloads"] },
     { name: "Contact", href: "/contact" },
   ];
 
