@@ -628,7 +628,7 @@ export function MembershipFormWizard() {
                 <Checkbox 
                   id="showThird"
                   checked={formData.showThirdApplicant}
-                  onCheckedChange={(checked) => updateFormData({ showThirdApplicant: checked })}
+                  onCheckedChange={(checked) => updateFormData({ showThirdApplicant: checked as boolean })}
                 />
                 <Label htmlFor="showThird">Include Third Applicant</Label>
               </div>
@@ -649,7 +649,7 @@ export function MembershipFormWizard() {
                     <Checkbox 
                       id="hasOtherYes"
                       checked={formData.hasOtherAccounts}
-                      onCheckedChange={(checked) => updateFormData({ hasOtherAccounts: checked })}
+                      onCheckedChange={(checked) => updateFormData({ hasOtherAccounts: checked as boolean })}
                     />
                     <Label htmlFor="hasOtherYes">YES</Label>
                   </div>
@@ -657,7 +657,7 @@ export function MembershipFormWizard() {
                     <Checkbox 
                       id="hasOtherNo"
                       checked={!formData.hasOtherAccounts}
-                      onCheckedChange={(checked) => updateFormData({ hasOtherAccounts: !checked })}
+                      onCheckedChange={(checked) => updateFormData({ hasOtherAccounts: !(checked as boolean) })}
                     />
                     <Label htmlFor="hasOtherNo">NO</Label>
                   </div>
@@ -1011,7 +1011,7 @@ export function MembershipFormWizard() {
                   id="atmYes"
                   checked={formData.atmServices.requested}
                   onCheckedChange={(checked) => updateFormData({ 
-                    atmServices: { ...formData.atmServices, requested: checked }
+                    atmServices: { ...formData.atmServices, requested: checked as boolean }
                   })}
                 />
                 <Label htmlFor="atmYes">Yes</Label>
@@ -1021,7 +1021,7 @@ export function MembershipFormWizard() {
                   id="atmNo"
                   checked={!formData.atmServices.requested}
                   onCheckedChange={(checked) => updateFormData({ 
-                    atmServices: { ...formData.atmServices, requested: !checked }
+                    atmServices: { ...formData.atmServices, requested: !(checked as boolean) }
                   })}
                 />
                 <Label htmlFor="atmNo">No</Label>
@@ -1082,7 +1082,7 @@ export function MembershipFormWizard() {
             <Checkbox 
               id="agreeTerms"
               checked={formData.agreeToTerms}
-              onCheckedChange={(checked) => updateFormData({ agreeToTerms: checked })}
+              onCheckedChange={(checked) => updateFormData({ agreeToTerms: checked as boolean })}
             />
             <Label htmlFor="agreeTerms">
               I/We hereby agree with the terms, conditions and undertakings as above which I/We have read and understood and confirm that information supplied is correct to the best of my/our knowledge.
@@ -1242,24 +1242,29 @@ export function MembershipFormWizard() {
         {renderStep()}
 
         <div className="flex justify-between mt-8">
-          <Button 
-            text="Previous"
-            variant="outline"
+          <button 
+            className="px-6 py-3 border-2 border-[#1a3c34] text-[#1a3c34] rounded-lg font-black text-sm uppercase tracking-widest hover:bg-[#1a3c34] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handlePrevious}
             disabled={currentStep === 1}
-          />
+          >
+            Previous
+          </button>
           {currentStep === getTotalSteps() ? (
-            <Button 
-              text="Submit Application"
+            <button 
+              className="px-6 py-3 bg-[#ffde21] text-[#1a3c34] rounded-lg font-black text-sm uppercase tracking-widest hover:bg-white hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleSubmit}
               disabled={!formData.agreeToTerms}
-            />
+            >
+              Submit Application
+            </button>
           ) : (
-            <Button 
-              text="Next"
+            <button 
+              className="px-6 py-3 bg-[#1a3c34] text-white rounded-lg font-black text-sm uppercase tracking-widest hover:bg-[#ffde21] hover:text-[#1a3c34] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleNext}
               disabled={!canProceed()}
-            />
+            >
+              Next
+            </button>
           )}
         </div>
       </div>
