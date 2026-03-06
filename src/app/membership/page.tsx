@@ -115,17 +115,6 @@ export default function MembershipPage() {
             <ChevronRight size={12} className="text-sacco-accent" />
             <span className="text-sacco-accent text-sm uppercase">Membership</span>
           </div>
-          <div className="flex gap-4">
-            <Link href="/membership/individual" onClick={(e) => handleLinkClick(e, "/membership/individual")} className="bg-sacco-accent text-[#1a3c34] px-4 py-1.5 rounded-none font-black text-[10px] uppercase tracking-widest hover:bg-white transition-colors">
-              Individual Account
-            </Link>
-            <Link href="/membership/joint" onClick={(e) => handleLinkClick(e, "/membership/joint")} className="bg-sacco-accent text-[#1a3c34] px-4 py-1.5 rounded-none font-black text-[10px] uppercase tracking-widest hover:bg-white transition-colors">
-              Joint Account
-            </Link>
-            <Link href="/membership/business" onClick={(e) => handleLinkClick(e, "/membership/business")} className="bg-sacco-accent text-[#1a3c34] px-4 py-1.5 rounded-none font-black text-[10px] uppercase tracking-widest hover:bg-white transition-colors">
-              Business Account
-            </Link>
-          </div>
         </div>
       </section>
 

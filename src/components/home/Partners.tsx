@@ -9,14 +9,13 @@ export function Partners() {
     { name: "KCB Bank", logo: "/images/partners/kcb-logo.png" },
     { name: "Equity Bank", logo: "/images/partners/equity-logo.png" },
     { name: "M-Pesa", logo: "/images/partners/mpesa-logo.png" },
-    { name: "Co-operative Bank", logo: "/images/partners/coop-logo.png" },
+    { name: "Co-operative Bank", logo: "/images/partners/coop-bank-logo.png" },
     { name: "KUSCCO", logo: "/images/partners/kuscco-logo.png" },
     { name: "CIC Group", logo: "/images/partners/cic-logo.png" },
     { name: "Rabobank", logo: "/images/partners/rabobank-logo.png" },
     { name: "ABC Bank", logo: "/images/partners/abc-logo.png" },
     { name: "Tangazo Letu", logo: "/images/partners/tangazo-letu.png" },
     { name: "Centrino Technologies", logo: "/images/partners/centrino-logo.png" },
-    { name: "Jumbo Star", logo: "/images/partners/jumbostar-logo.png" },
     { name: "Sky World", logo: "/images/partners/skyworld-logo.png" },
   ];
 
