@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { 
   Building, FileText, Upload, CreditCard, Smartphone, 
@@ -40,7 +40,7 @@ interface BusinessFormData {
   director4: { fullName: string; idNumber: string; pinNumber: string; mobileNumber: string; email: string };
 }
 
-export default function BusinessFormPage() {
+function BusinessFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -319,5 +319,21 @@ export default function BusinessFormPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+// Wrapper component with Suspense boundary
+export default function BusinessFormPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sacco-dark mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading business application form...</p>
+        </div>
+      </div>
+    }>
+      <BusinessFormContent />
+    </Suspense>
   );
 }
