@@ -1,0 +1,32 @@
+Navbar Submenu Items → Generated URLs → Page Exists?
+
+Savings Menu:
+- "Savings Account" → "/savings-account" → ✅ EXISTS
+- "Fixed Deposit Account" → "/fixed-deposit-account" → ✅ EXISTS  
+- "Education Savings" → "/education-savings" → ✅ EXISTS
+- "Business Account" → "/business-account" → ✅ EXISTS
+- "Thamani Junior Account" → "/thamani-junior-account" → ✅ EXISTS
+
+Loans Menu:
+- "FOSA Product Loans" → "/fosa-product-loans" → ✅ EXISTS
+- "BOSA Products" → "/bosa-products" → ✅ EXISTS
+
+Services Menu:
+- "Mobile Banking" → "/mobile-banking" → ✅ EXISTS
+- "Agency Banking" → "/agency-banking" → ✅ EXISTS
+- "Paybill Services" → "/paybill-services" → ✅ EXISTS
+- "ATM Services" → "/atm-services" → ✅ EXISTS
+- "Western Union" → "/western-union" → ✅ EXISTS
+- "Till Numbers" → "/till-numbers" → ✅ EXISTS
+
+Media Center Menu:
+- "News" → "/news" → ✅ EXISTS
+- "Gallery" → "/gallery" → ✅ EXISTS
+- "Downloads" → "/downloads" → ✅ EXISTS
+- "Careers" → "/careers" → ✅ EXISTS
+
+All URLs appear to match existing pages. The 404 errors might be due to:
+1. Missing page content (empty pages)
+2. Incorrect imports
+3. Build errors
+4. Routing issues
