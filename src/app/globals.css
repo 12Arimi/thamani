@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   /* PRIMARY BRAND COLORS */
   --color-sacco-dark: #2e632b;    /* Deep Forest Green (Trust) */
   --color-sacco-light: #49a146;   /* Agriculture Green (Growth) */
@@ -13,7 +13,9 @@
   
   /* SHADOWS & RADIUS */
   --radius-sacco: 12px;
+}
 
+:root {
   --background: #ffffff;
   --foreground: #1a1a1a;
   --section-alt: var(--color-sacco-mist);
