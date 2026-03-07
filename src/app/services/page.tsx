@@ -53,8 +53,8 @@ export default function ServicesListPage() {
       {/* 1. SLIM BANNER STRIP */}
       <section className="relative h-[150px] w-full flex items-center justify-center overflow-hidden border-b-4 border-sacco-accent">
         <img 
-          src="/images/mobile-banking-bg02.jpg" 
-          className="absolute inset-0 w-full h-full object-cover opacity-80" 
+          src="/images/banners/dairy2.png" 
+          className="absolute inset-0 w-full h-full object-cover opacity-90" 
           alt="Our Services"
         />
         <div className="absolute inset-0 bg-sacco-dark/50"></div>

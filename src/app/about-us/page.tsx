@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* 1. SLIM BANNER STRIP */}
       <section className="relative h-[170px] w-full flex items-center justify-center overflow-hidden border-b-4 border-sacco-accent m-0 p-0">
         <img 
-          src="/images/mobile-banking-bg02.jpg" 
+          src="/images/banners/tea-farmer-money.png" 
           className="absolute inset-0 w-full h-full object-cover" 
           alt="Thamani Sacco Banner"
         />

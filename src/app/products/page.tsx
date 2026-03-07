@@ -55,11 +55,11 @@ export default function ProductsPage() {
       {/* 1. SLIM BANNER STRIP - Responsive horizontal padding */}
       <section className="relative h-[150px] w-full flex items-center justify-center overflow-hidden border-b-4 border-sacco-accent">
         <img 
-          src="/images/mobile-banking-bg02.jpg" 
-          className="absolute inset-0 w-full h-full object-cover opacity-80" 
+          src="/images/banners/tea-money-growth.jpg" 
+          className="absolute inset-0 w-full h-full object-cover opacity-90" 
           alt="Our Products"
         />
-        <div className="absolute inset-0 bg-sacco-dark/50"></div>
+        <div className="absolute inset-0 bg-sacco-dark/40"></div>
         
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-16 flex flex-col items-center justify-center text-center gap-3">
           <h1 className="text-3xl lg:text-5xl font-black text-white uppercase tracking-tighter">

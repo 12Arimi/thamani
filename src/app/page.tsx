@@ -16,7 +16,7 @@ export default function Home() {
       <MissionVision />
       <ServicesSection />
       <ProductsSection />
-      <News />
+      {/* <News /> */}
       <Partners />
     </main>
   );
